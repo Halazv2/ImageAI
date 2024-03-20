@@ -1,8 +1,13 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { UserButton } from "@clerk/nextjs";
 
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <div>
+      <h1>ImageAi</h1>
+      <UserButton afterSignOutUrl='/' />
+    </div>
+  );
 };
 
 export default Home;
