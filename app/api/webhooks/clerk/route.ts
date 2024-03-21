@@ -12,7 +12,7 @@ export async function POST(req: Request) {
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
 
   if (!WEBHOOK_SECRET) {
-    throw new Error("Please add WEBHOOK_SECRET from Clerk Dashboard .env.local");
+    throw new Error("Please add WEBHOOK_SECRET from Clerk Dashboard to .env or .env.local");
   }
 
   // Get the headers
@@ -67,8 +67,6 @@ export async function POST(req: Request) {
       lastName: last_name,
       photo: image_url,
     };
-
-    console.log(user);
 
     const newUser = await createUser(user);
 
