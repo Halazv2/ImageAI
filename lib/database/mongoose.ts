@@ -1,32 +1,34 @@
 import mongoose, { Mongoose } from "mongoose";
 
-const MONGOOSE_URL = process.env.MONGOOSE_URL;
+const MONGODB_URL = process.env.MONGODB_URL;
 
 interface MongooseConnection {
-  connection: Mongoose | null;
+  conn: Mongoose | null;
   promise: Promise<Mongoose> | null;
 }
 
 let cached: MongooseConnection = (global as any).mongoose;
 
 if (!cached) {
-  cached = (global as any).mongoose = { connection: null, promise: null };
+  cached = (global as any).mongoose = {
+    conn: null,
+    promise: null,
+  };
 }
 
 export const connectToDatabase = async () => {
-  if (cached.connection) return cached.connection;
+  if (cached.conn) return cached.conn;
 
-  if (!MONGOOSE_URL) throw new Error("Mongoose URL is not defined!");
+  if (!MONGODB_URL) throw new Error("Missing MONGODB_URL");
 
   cached.promise =
     cached.promise ||
-    mongoose.connect(MONGOOSE_URL, {
+    mongoose.connect(MONGODB_URL, {
       dbName: "ImageAI",
       bufferCommands: false,
     });
 
-  cached.connection = await cached.promise;
-  console.log(cached.connection);
+  cached.conn = await cached.promise;
 
-  return cached.connection;
+  return cached.conn;
 };
