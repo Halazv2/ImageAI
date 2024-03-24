@@ -25,12 +25,13 @@ const MediaUploader = ({
   const onUploadSuccess = (result: any) => {
     setImage((pevState: any) => ({
       ...pevState,
-      publicId: result.info.public_id,
-      width: result.info.width,
-      height: result.info.height,
-      secureUrl: result.info.secure_url,
+      publicId: result?.info?.public_id,
+      width: result?.info?.width,
+      height: result?.info?.height,
+      secureURL: result?.info?.secure_url,
     }));
-    onValueChange(result.info.public_id);
+
+    onValueChange(result?.info?.public_id);
 
     toast({
       title: 'Image uploaded successfully',
