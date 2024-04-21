@@ -9,6 +9,7 @@ const TransactionSchema = new Schema({
   buyer: { type: Schema.Types.ObjectId, ref: "User" },
 });
 
-const Transaction = models?.Transaction || model("Transaction", TransactionSchema);
+const Transaction =
+  models?.Transaction || model("Transaction", TransactionSchema);
 
 export default Transaction;
