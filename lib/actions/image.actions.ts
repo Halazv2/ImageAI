@@ -1,18 +1,18 @@
-'use server';
-import { revalidatePath } from 'next/cache';
-import { connectToDatabase } from '../database/mongoose';
-import { handleError } from '../utils';
-import User from '../database/models/user.model';
-import Image from '../database/models/image.model';
-import { redirect } from 'next/navigation';
+"use server";
+import { revalidatePath } from "next/cache";
+import { connectToDatabase } from "../database/mongoose";
+import { handleError } from "../utils";
+import User from "../database/models/user.model";
+import Image from "../database/models/image.model";
+import { redirect } from "next/navigation";
 
-import { v2 as cloudinary } from 'cloudinary';
+import { v2 as cloudinary } from "cloudinary";
 
 const populateUser = (query: any) =>
   query.populate({
-    path: 'author',
+    path: "author",
     model: User,
-    select: '_id firstName lastName clerkId',
+    select: "_id firstName lastName clerkId",
   });
 
 // add image
@@ -22,7 +22,7 @@ export async function addImage({ image, userId, path }: AddImageParams) {
 
     const author = await User.findById(userId);
 
-    if (!author) throw new Error('user not found');
+    if (!author) throw new Error("user not found");
 
     const newImage = await Image.create({
       ...image,
@@ -43,9 +43,9 @@ export async function updateImage({ image, userId, path }: UpdateImageParams) {
 
     const oldImage = await Image.findById(image._id);
 
-    if (!oldImage) throw new Error('image not found');
+    if (!oldImage) throw new Error("image not found");
     if (oldImage.author && oldImage.author.toHexString() !== userId)
-      throw new Error('unauthorized');
+      throw new Error("unauthorized");
 
     const updatedImage = await Image.findByIdAndUpdate(oldImage._id, image, {
       new: true,
@@ -67,7 +67,7 @@ export async function deleteImage(imageId: string) {
   } catch (error) {
     handleError(error);
   } finally {
-    redirect('/');
+    redirect("/");
   }
 }
 
@@ -78,7 +78,7 @@ export async function getImageById(imageId: string) {
 
     const image = await populateUser(Image.findById(imageId));
 
-    if (!image) throw new Error('image not found');
+    if (!image) throw new Error("image not found");
 
     return JSON.parse(JSON.stringify(image));
   } catch (error) {
@@ -89,7 +89,7 @@ export async function getImageById(imageId: string) {
 export async function getAllImages({
   limit = 9,
   page = 1,
-  searchQuery = '',
+  searchQuery = "",
 }: {
   limit?: number;
   page: number;
@@ -105,7 +105,7 @@ export async function getAllImages({
       secure: true,
     });
 
-    let expression = 'folder=image_ia';
+    let expression = "folder=image_ia";
 
     if (searchQuery) {
       expression += ` AND ${searchQuery}`;
@@ -121,7 +121,7 @@ export async function getAllImages({
 
     if (resourceIds.length === 0 && searchQuery) {
       query = {
-        title: new RegExp(searchQuery, 'i'), // 'i' makes it case insensitive
+        title: new RegExp(searchQuery, "i"), // 'i' makes it case insensitive
       };
     } else if (searchQuery) {
       query = {

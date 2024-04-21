@@ -1,3 +1,7 @@
 {
-  "extends": ["next/core-web-vitals", "plugin:prettier/recommended"]
+  "extends": ["next/core-web-vitals", "plugin:prettier/recommended"],
+  // double quotes are used for consistency with the rest of the file
+  "rules": {
+    "quotes": ["error", "double"]
+  }
 }

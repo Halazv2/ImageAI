@@ -1,12 +1,12 @@
-import { auth } from '@clerk/nextjs';
-import Image from 'next/image';
-import Link from 'next/link';
-import Header from '@/components/Shared/Header';
-import TransformedImage from '@/components/Shared/TransformedImage';
-import { Button } from '@/components/ui/button';
-import { getImageById } from '@/lib/actions/image.actions';
-import { getImageSize } from '@/lib/utils';
-import { transformationTypes } from '@/constants';
+import { auth } from "@clerk/nextjs";
+import Image from "next/image";
+import Link from "next/link";
+import Header from "@/components/Shared/Header";
+import TransformedImage from "@/components/Shared/TransformedImage";
+import { Button } from "@/components/ui/button";
+import { getImageById } from "@/lib/actions/image.actions";
+import { getImageSize } from "@/lib/utils";
+import { transformationTypes } from "@/constants";
 
 const ImageDetails = async ({ params: { id } }: SearchParamProps) => {
   const { userId } = auth();
@@ -63,8 +63,8 @@ const ImageDetails = async ({ params: { id } }: SearchParamProps) => {
             <h3 className="h3-bold text-dark-600">Original</h3>
 
             <Image
-              width={getImageSize(image.transformationType, image, 'width')}
-              height={getImageSize(image.transformationType, image, 'height')}
+              width={getImageSize(image.transformationType, image, "width")}
+              height={getImageSize(image.transformationType, image, "height")}
               src={image.secureURL}
               alt="image"
               className="transformation-original_image"

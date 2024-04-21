@@ -1,23 +1,23 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import Image from "next/image";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
-import { Input } from '@/components/ui/input';
-import { formUrlQuery, removeKeysFromQuery } from '@/lib/utils';
+import { Input } from "@/components/ui/input";
+import { formUrlQuery, removeKeysFromQuery } from "@/lib/utils";
 
 export const Search = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       if (query) {
         const newUrl = formUrlQuery({
           searchParams: searchParams.toString(),
-          key: 'query',
+          key: "query",
           value: query,
         });
 
@@ -25,7 +25,7 @@ export const Search = () => {
       } else {
         const newUrl = removeKeysFromQuery({
           searchParams: searchParams.toString(),
-          keysToRemove: ['query'],
+          keysToRemove: ["query"],
         });
 
         router.push(newUrl, { scroll: false });

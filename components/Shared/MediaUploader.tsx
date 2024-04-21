@@ -1,9 +1,9 @@
-'use client';
-import Image from 'next/image';
-import { useToast } from '../ui/use-toast';
-import { CldImage, CldUploadWidget } from 'next-cloudinary';
-import { dataUrl, getImageSize } from '@/lib/utils';
-import { PlaceholderValue } from 'next/dist/shared/lib/get-img-props';
+"use client";
+import Image from "next/image";
+import { useToast } from "../ui/use-toast";
+import { CldImage, CldUploadWidget } from "next-cloudinary";
+import { dataUrl, getImageSize } from "@/lib/utils";
+import { PlaceholderValue } from "next/dist/shared/lib/get-img-props";
 
 type MediaUploaderProps = {
   onValueChange: (value: string) => void;
@@ -34,17 +34,17 @@ const MediaUploader = ({
     onValueChange(result?.info?.public_id);
 
     toast({
-      title: 'Image uploaded successfully',
-      description: '1 credit has been deducted from your account',
+      title: "Image uploaded successfully",
+      description: "1 credit has been deducted from your account",
       duration: 3000,
-      className: 'success-toast',
+      className: "success-toast",
     });
   };
   const onUploadError = () => {
     toast({
-      title: 'Something went wrong while uploading the image',
-      description: 'Please try again',
-      className: 'error-toast',
+      title: "Something went wrong while uploading the image",
+      description: "Please try again",
+      className: "error-toast",
     });
   };
 
@@ -53,7 +53,7 @@ const MediaUploader = ({
       uploadPreset="image_ia"
       options={{
         multiple: false,
-        resourceType: 'image',
+        resourceType: "image",
       }}
       onSuccess={onUploadSuccess}
       onError={onUploadError}
@@ -64,10 +64,10 @@ const MediaUploader = ({
           {publicId ? (
             <div className="cursor-pointer overflow-hidden rounded-[10px]">
               <CldImage
-                width={getImageSize(type, image, 'width')}
-                height={getImageSize(type, image, 'height')}
+                width={getImageSize(type, image, "width")}
+                height={getImageSize(type, image, "height")}
                 src={publicId}
-                sizes={'(max-width: 767px) 100vw, 50vw'}
+                sizes={"(max-width: 767px) 100vw, 50vw"}
                 alt={dataUrl as PlaceholderValue}
                 className="media-uploader_cldImage"
               />

@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { dataUrl, debounce, download, getImageSize } from '@/lib/utils';
-import { CldImage, getCldImageUrl } from 'next-cloudinary';
-import { PlaceholderValue } from 'next/dist/shared/lib/get-img-props';
-import Image from 'next/image';
-import React from 'react';
+import { dataUrl, debounce, download, getImageSize } from "@/lib/utils";
+import { CldImage, getCldImageUrl } from "next-cloudinary";
+import { PlaceholderValue } from "next/dist/shared/lib/get-img-props";
+import Image from "next/image";
+import React from "react";
 
 const TransformedImage = ({
   image,
@@ -52,11 +52,11 @@ const TransformedImage = ({
       {image?.publicId && transformationConfig ? (
         <div className="relative">
           <CldImage
-            width={getImageSize(type, image, 'width')}
-            height={getImageSize(type, image, 'height')}
+            width={getImageSize(type, image, "width")}
+            height={getImageSize(type, image, "height")}
             src={image?.publicId}
-            alt={image?.title || 'Transformed Image'}
-            sizes={'(max-width: 767px) 100vw, 50vw'}
+            alt={image?.title || "Transformed Image"}
+            sizes={"(max-width: 767px) 100vw, 50vw"}
             placeholder={dataUrl as PlaceholderValue}
             className="transformed-image"
             onLoad={() => {

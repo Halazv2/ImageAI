@@ -1,14 +1,14 @@
-import { Collection } from '@/components/Shared/Collection';
-import { navLinks } from '@/constants';
-import { getAllImages } from '@/lib/actions/image.actions';
+import { Collection } from "@/components/Shared/Collection";
+import { navLinks } from "@/constants";
+import { getAllImages } from "@/lib/actions/image.actions";
 
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react';
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
 const Home = async ({ searchParams }: SearchParamProps) => {
   const page = Number(searchParams?.page) || 1;
-  const searchQuery = (searchParams?.query as string) || '';
+  const searchQuery = (searchParams?.query as string) || "";
 
   const images = await getAllImages({ page, searchQuery });
   return (

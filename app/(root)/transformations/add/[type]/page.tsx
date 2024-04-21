@@ -1,10 +1,10 @@
-import { transformationTypes } from '@/constants';
-import { getUserById } from '@/lib/actions/user.actions';
-import { auth } from '@clerk/nextjs';
-import { redirect } from 'next/navigation';
+import { transformationTypes } from "@/constants";
+import { getUserById } from "@/lib/actions/user.actions";
+import { auth } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 
-import Header from '@/components/Shared/Header';
-import TransformationForm from '@/components/Shared/TransformationForm';
+import Header from "@/components/Shared/Header";
+import TransformationForm from "@/components/Shared/TransformationForm";
 
 const AddTransformationTypePage = async ({
   params: { type },
@@ -12,7 +12,7 @@ const AddTransformationTypePage = async ({
   const { userId } = auth();
   const transformation = transformationTypes[type];
 
-  if (!userId) redirect('/sign-in');
+  if (!userId) redirect("/sign-in");
 
   const user = await getUserById(userId);
 
